@@ -1,1 +1,4 @@
-console.log("hello")
+function vowelEater(string){
+
+	return
+}
