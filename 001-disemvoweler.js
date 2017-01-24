@@ -1,4 +1,6 @@
 function vowelEater(string){
-
-	return
+	
+	return string;
 }
+
+console.log(vowelEater("Hello"))
