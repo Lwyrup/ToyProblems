@@ -8,7 +8,8 @@ function rollForInitative(string){
 	for(var i = 0; i < numOfDie; i++){
 		rollresult.push(Math.ceil(Math.random()*faceOfDie));
 	}
-	return rollresult;
+	return "The dice roll... " + rollresult + "\n";
 }
 
 console.log(rollForInitative("2d20"))
+console.log(rollForInitative("10d6"))
