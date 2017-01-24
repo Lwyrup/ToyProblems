@@ -5,7 +5,10 @@ function rollForInitative(string){
 	var faceOfDie = parseInt(inputNums[1]);
 	console.log("A " + faceOfDie + " sided die is rolled " + numOfDie + " times.")
 
-	return
+	for(var i = 0; i < numOfDie; i++){
+		rollresult.push(Math.ceil(Math.random()*faceOfDie));
+	}
+	return rollresult;
 }
 
 console.log(rollForInitative("2d20"))
