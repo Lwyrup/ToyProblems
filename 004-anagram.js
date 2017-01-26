@@ -8,4 +8,22 @@ function anagramChecker(array){
 return console.log( "Is [" + array + "] anagram: " + (sorted[0].join("") === sorted[1].join("")));
 }
 
-anagramChecker(["Clint Eastwood", "Old West Action"]);
+//CODE EXECUTION BEGINS HERE
+var tests =[["wisdom", "mid sow"],
+["Seth Rogan", "Gathers No"],
+["Reddit", "Eat Dirt"],
+["Schoolmaster", "The classroom"],
+["Astronomers", "Moon starer"],
+["Vacation Times", "I'm Not as Active"],
+["Clint Eastwood", "Old West Action"]]
+
+for(var i = 0; i < tests.length; i++){
+	anagramChecker(tests[i])
+}
+
+
+
+
+
+
+
