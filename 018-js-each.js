@@ -9,12 +9,12 @@ function each(array, thing){
 
 
 function yell(it){
-	return it.toUpperCase().concat("!");
+	console.log( it.toUpperCase().concat("!") );
 };
 
 
 
 var friends = ["Dan","Mindy","Devon","Alex"]
 
-console.log( each(friends, yell) );
+each(friends, yell);
 each(friends, console.log);
