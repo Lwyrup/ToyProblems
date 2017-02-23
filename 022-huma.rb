@@ -11,4 +11,6 @@ doc = Nokogiri::HTML(open('https://en.wikipedia.org/wiki/' + desiredKnowledge))
 docName = doc.xpath('//h1')[0].text
 docOverview = doc.xpath('//p')[0].text
 
-puts "#{docName}\n\n#{docOverview}"
+docOverview.slice! /\[\d+\]/
+binding.pry
+puts "\n#{docName}\n\n#{docOverview}"
