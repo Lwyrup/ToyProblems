@@ -70,7 +70,7 @@ end
 
 def filterEmpties(nokoarray)
 	i = 0
-	nokoarray.delete_if { |p| p.content == ""}
+	nokoarray.delete_if { |p| p.text.match(/[a-z]/i) == nil}
 	for paragraph in nokoarray
 		nokoarray[i].content = removeFootnotes(nokoarray[i].text)
 		i += 1
@@ -83,7 +83,7 @@ end
 
 def showPage(results)
 	if results != nil
-		puts yellow("#{results['title']}".center(75,"–"))
+		puts "\n"*2 + yellow("#{results['title']}".center(75,"–"))
 		puts listControl(1) if results["page"].length > 1
 		puts "#{results["page"].length} paragraphs found"
 		showParagraph(results)
@@ -111,9 +111,9 @@ end
 
 def listControl(num)
 	if num == 0 
-		return "Search again? " + blue("(enter ") + red("'yes' ") + blue("to continue or ") + red("'any key' ") + blue("to exit)")
+		return "Search again? " + blue("(enter ") + red("'yes' ") + blue("to continue or ") + red("'enter' ") + blue("to exit)")
 	else
-		return blue("--(enter ") + red("'xit' ") + blue("to exit the article or ") + red("'any key' ") + blue("to continue reading)")
+		return blue("--(enter ") + red("'xit' ") + blue("to exit the article or ") + red("'enter' ") + blue("to continue reading)")
 	end	
 end
 
