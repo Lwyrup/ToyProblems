@@ -70,6 +70,55 @@ class PokeAPI
 	end
 end
 
+class User
+	@input1
+	@input2
+
+	def ask
+		puts "Enter the number of a pokemon."
+		createInput( @input1 )
+		puts "Enter another number of a pokemon."
+		createInput( @input2 )
+	end
+
+	private
+	
+	def checkInput( input )
+		while !input.isValid?
+			puts "Invalid input. Try again."
+			input = Input.new( gets.chomp )
+		end
+	end
+
+	def createInput(input )
+		input = Input.new( gets.chomp )
+		checkInput( input )
+	end
+end
+
+class Input
+	def initialize( input )
+		@value = input
+		@isValid = !!matchesPattern(@value)
+	end
+
+	def isValid?
+		return @isValid
+	end
+
+	private
+	def matchesPattern(string)
+	    return string =~ /(^[a-zA-Z]+$|^\d+$)/
+	end
+end
+
+# api = PokeAPI.new()
+# # Get user input
+# api.getPokemonById( userInput )
+
+# create pokemon from json
+# compare stats
+
 binding.pry
 
 
