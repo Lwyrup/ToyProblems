@@ -39,9 +39,11 @@ class UserInputs
 
 	def ask
 		puts "Enter the number of a pokemon."
-		createInput( @input1 )
+		@input1 = Input.new( gets.chomp )
+		checkInput(@input1)
 		puts "Enter another number of a pokemon."
-		createInput( @input2 )
+		@input2 = Input.new( gets.chomp )
+		checkInput(@input2)
 	end
 
 	def values
@@ -52,14 +54,9 @@ class UserInputs
 
 	def checkInput( input )
 		while !input.isValid?
-			puts "Invaleid input. Try again."
+			puts "Invalid input. Try again."
 			input = Input.new( gets.chomp )
 		end
-	end
-
-	def createInput(input )
-		input = Input.new( gets.chomp )
-		checkInput( input )
 	end
 end
 
@@ -87,13 +84,20 @@ api = PokeAPI.new
 inputs = UserInputs.new
 inputs.ask()
 data = inputs.values()
-# api.getPokemonById( data[0] )
-# api.getPokemonById( data[1] )
+poke1JSON = api.getPokemonById( data[0] )
+poke2JSON = api.getPokemonById( data[1] )
 
-# create pokemon from json
+pokemon1 = Pokemon.new(poke1JSON["name"], poke1JSON["stats"][0]["base_stat"])
+pokemon2 = Pokemon.new(poke2JSON["name"], poke2JSON["stats"][0]["base_stat"])
+
 # compare stats
-
-binding.pry
+if pokemon1.speed > pokemon2.speed
+	puts pokemon1.name + " is faster than " + pokemon2.name
+elsif pokemon2.speed > pokemon1.speed
+	puts pokemon2.name + " is faster than " + pokemon1.name
+else
+	puts pokemon1.name + " and " + pokemon2.name + " are the same speed"
+end
 
 
 
