@@ -2,43 +2,6 @@ require 'net/http'
 require 'json'
 require 'pry'
 
-# def getPokemonData(number)
-# 	uri = URI('http://pokeapi.co/api/v2/pokemon/' + number.to_s + '/')
-# 	massData = Net::HTTP.get(uri)
-# 	return jsonData = JSON.parse(massData)
-# end
-
-# def getSpeedAndName(jsonObject)
-# 	return {"name" => jsonObject["name"], "speed" => jsonObject["stats"][0]["base_stat"]}
-# end
-
-# def comparePokemonSpeed(pokemon1, pokemon2)
-# 	if pokemon1["speed"] < pokemon2["speed"]
-# 		return pokemon2["name"] + " is faster."
-# 	elsif pokemon1["speed"] > pokemon2["speed"]
-# 		return pokemon1["name"] + " is faster."
-# 	else
-# 		return pokemon1["name"] + " and " + pokemon2["name"] + " are the same speed."
-# 	end
-# end
-
-# def pokeDecider(pokeNum1, pokeNum2)
-# 	poke1 = getSpeedAndName(getPokemonData(pokeNum1))
-# 	poke2 = getSpeedAndName(getPokemonData(pokeNum2))
-# 	return comparePokemonSpeed(poke1,poke2)
-# end
-
-# def askUser()
-# 	puts "Enter a number of a pokemon..."
-# 	pokemonNum1 = gets.chomp
-# 	puts "Enter another number of a pokemon..."
-# 	pokemonNum2 = gets.chomp
-# 	puts pokeDecider(pokemonNum1, pokemonNum2)
-# end
-
-# askUser()
-
-
 class Pokemon
 	def initialize(name, speed)
 		@name = name
@@ -70,7 +33,7 @@ class PokeAPI
 	end
 end
 
-class User
+class UserInputs
 	@input1
 	@input2
 
@@ -81,11 +44,15 @@ class User
 		createInput( @input2 )
 	end
 
+	def values
+		return [@input1.value, @input2.value]
+	end
+
 	private
-	
+
 	def checkInput( input )
 		while !input.isValid?
-			puts "Invalid input. Try again."
+			puts "Invaleid input. Try again."
 			input = Input.new( gets.chomp )
 		end
 	end
@@ -102,6 +69,10 @@ class Input
 		@isValid = !!matchesPattern(@value)
 	end
 
+	def value
+		return @value
+	end
+
 	def isValid?
 		return @isValid
 	end
@@ -112,9 +83,12 @@ class Input
 	end
 end
 
-# api = PokeAPI.new()
-# # Get user input
-# api.getPokemonById( userInput )
+api = PokeAPI.new
+inputs = UserInputs.new
+inputs.ask()
+data = inputs.values()
+# api.getPokemonById( data[0] )
+# api.getPokemonById( data[1] )
 
 # create pokemon from json
 # compare stats
