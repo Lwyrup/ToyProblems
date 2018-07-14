@@ -57,7 +57,7 @@ def determinePageContent(page)
 end
 
 def build_blankMayReferTo_page(page)
-	return [page.css("#mw-content-text > ul, p")]
+	return [page.css("#mw-content-text ul, p")]
 end
 
 def build_article_page(page)
