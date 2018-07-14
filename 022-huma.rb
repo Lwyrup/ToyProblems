@@ -43,11 +43,11 @@ end
 
 def determinePageContent(page)
 	wikiName = page.css("#firstHeading").text
-	wikiText = page.css("#mw-content-text > p")
+	wikiText = page.css("#mw-content-text p")
 	wikiArray = {"title" => wikiName}
+
 	if wikiText[0].text.downcase.include?("refer to:")
 		# build the referal page text
-		
 		wikiArray["page"] = build_blankMayReferTo_page(page)
 	else
 		# build article
@@ -61,7 +61,7 @@ def build_blankMayReferTo_page(page)
 end
 
 def build_article_page(page)
-	allParagraphs = page.css("#mw-content-text > p").to_a
+	allParagraphs = page.css("#mw-content-text p").to_a
 	allParagraphs = filterEmpties(allParagraphs)
 
 	return allParagraphs
@@ -95,7 +95,6 @@ def showParagraph(results)
 	i = 0
 
 	#clean out blanks
-
 
 	for paragraph in results["page"] do
 		
