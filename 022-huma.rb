@@ -10,9 +10,9 @@ end
 
 def search()
 	puts "\nWhat do you want to know about?"
-	desiredKnowledge = formatQuery(gets.chomp)
-	if desiredKnowledge != ""
-		return askWikipedia(desiredKnowledge)
+	query = formatQuery(gets.chomp)
+	if query != ""
+		return askWikipedia(query)
 	else
 		puts red("Invalid query entered")
 		search()
@@ -38,9 +38,8 @@ def askWikipedia(query)
 end
 
 def determinePageContent(page)
-	wikiText = page.css("#mw-content-text p")
 	wikiArray = {"title" => page.css("#firstHeading").text}
-	if wikiText[0].text.downcase.include?("refer to:")
+	if page.css("#mw-content-text p")[0].text.downcase.include?("refer to:")
 		wikiArray["page"] = build_blankMayReferTo_page(page)
 	else
 		wikiArray["page"] = build_article_page(page)
@@ -58,14 +57,14 @@ def build_article_page(page)
 	return allParagraphs
 end
 
-def filterEmpties(nokoarray)
+def filterEmpties(paraArray)
 	i = 0
-	nokoarray.delete_if { |p| p.text.match(/[a-z]/i) == nil}
-	for paragraph in nokoarray
-		nokoarray[i].content = removeFootnotes(nokoarray[i].text)
+	paraArray.delete_if { |p| p.text.match(/[a-z]/i) == nil}
+	for para in paraArray
+		paraArray[i].content = removeFootnotes(paraArray[i].text)
 		i += 1
 	end
-	return nokoarray
+	return paraArray
 end
 
 def removeFootnotes(text)
